@@ -16,15 +16,15 @@ It assumes the following folders are standard paths of each environment:
      * MacOSX:
    - * System level configuration folder
      * ``%PROGRAMDATA%`` (``C:\\ProgramData``)
-     * ``${XDG_CONFIG_DIRS}`` (``/etc/xdg``)
+     * ``${XDG_CONFIG_DIRS}``, otherwise (``/etc``)
      * ``/Library/Application Support``
    - * User level configuration folder
      * ``%APPDATA%`` (``C:\\Users\\<User>\\AppData\\Roaming``)
-     * ``${XDG_CONFIG_HOME}`` (``${HOME}/.config``)
+     * ``${XDG_CONFIG_HOME}``, otherwise (``${HOME}/.config``)
      * ``${HOME}/Library/Application Support``
    - * User wide cache folder
      * ``%LOCALAPPDATA%`` ``(C:\\Users\\<User>\\AppData\\Local)``
-     * ``${XDG_CACHE_HOME}`` (``${HOME}/.cache``)
+     * ``${XDG_CACHE_HOME}``, otherwise (``${HOME}/.cache``)
      * ``${HOME}/Library/Caches``
 
 Examples
@@ -37,7 +37,7 @@ Getting Configuration
 
 * Local path (if you add the path via LocalPath parameter)
 * User level configuration folder(e.g. ``$HOME/.config/<vendor-name>/<application-name>/setting.json`` in Linux)
-* System level configuration folder(e.g. ``/etc/xdg/<vendor-name>/<application-name>/setting.json`` in Linux)
+* System level configuration folder(e.g. ``/etc/<vendor-name>/<application-name>/setting.json`` in Linux)
 
 ``configdir.Config`` provides some convenient methods(``ReadFile``, ``WriteFile`` and so on).
 
