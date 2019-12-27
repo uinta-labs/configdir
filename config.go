@@ -2,20 +2,20 @@
 //
 // System wide configuration folders:
 //
-//   - Windows: %PROGRAMDATA% (C:\ProgramData)
-//   - Linux/BSDs: ${XDG_CONFIG_DIRS} (/etc/xdg)
+//   - Windows: %PROGRAMDATA%, otherwise C:\ProgramData
+//   - Linux/BSDs: ${XDG_CONFIG_DIRS}, otherwise /etc
 //   - MacOSX: "/Library/Application Support"
 //
 // User wide configuration folders:
 //
 //   - Windows: %APPDATA% (C:\Users\<User>\AppData\Roaming)
-//   - Linux/BSDs: ${XDG_CONFIG_HOME} (${HOME}/.config)
+//   - Linux/BSDs: ${XDG_CONFIG_HOME}, otherwise ${HOME}/.config
 //   - MacOSX: "${HOME}/Library/Application Support"
 //
 // User wide cache folders:
 //
-//   - Windows: %LOCALAPPDATA% (C:\Users\<User>\AppData\Local)
-//   - Linux/BSDs: ${XDG_CACHE_HOME} (${HOME}/.cache)
+//   - Windows: %LOCALAPPDATA%, otherwise C:\Users\<User>\AppData\Local
+//   - Linux/BSDs: ${XDG_CACHE_HOME, otherwise ${HOME}/.cache
 //   - MacOSX: "${HOME}/Library/Caches"
 //
 // configdir returns paths inside the above folders.
