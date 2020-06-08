@@ -28,15 +28,15 @@ import (
 	"path/filepath"
 )
 
-type ConfigType int
+type ConfigType string
 
 const (
-	System ConfigType = iota
-	Global
-	All
-	Existing
-	Local
-	Cache
+	System   ConfigType = "system"
+	User     ConfigType = "user"
+	All      ConfigType = "all"
+	Existing ConfigType = "existing"
+	Local    ConfigType = "local"
+	Cache    ConfigType = "cache"
 )
 
 // Config represents each folder
@@ -79,6 +79,11 @@ func (c Config) MkdirAll() error {
 	return os.MkdirAll(c.Path, 0755)
 }
 
+func (c Config) DirectoryExists() bool {
+	_, err := os.Stat(c.Path)
+	return !os.IsNotExist(err)
+}
+
 func (c Config) Exists(fileName string) bool {
 	_, err := os.Stat(filepath.Join(c.Path, fileName))
 	return !os.IsNotExist(err)
@@ -110,7 +115,7 @@ func (c ConfigDir) QueryFolders(configType ConfigType) []*Config {
 		return []*Config{c.QueryCacheFolder()}
 	}
 	var result []*Config
-	if c.LocalPath != "" && configType != System && configType != Global {
+	if c.LocalPath != "" && configType != System && configType != User {
 		result = append(result, &Config{
 			Path: c.LocalPath,
 			Type: Local,
@@ -118,11 +123,11 @@ func (c ConfigDir) QueryFolders(configType ConfigType) []*Config {
 	}
 	if configType != System && configType != Local {
 		result = append(result, &Config{
-			Path: c.joinPath(globalSettingFolder),
-			Type: Global,
+			Path: c.joinPath(userSettingFolder),
+			Type: User,
 		})
 	}
-	if configType != Global && configType != Local {
+	if configType != User && configType != Local {
 		for _, root := range systemSettingFolders {
 			result = append(result, &Config{
 				Path: c.joinPath(root),
@@ -140,6 +145,13 @@ func (c ConfigDir) QueryFolders(configType ConfigType) []*Config {
 		}
 	}
 	return existing
+}
+
+func (c ConfigDir) QueryUserFolder() *Config {
+	return &Config{
+		Path: c.joinPath(userSettingFolder),
+		Type: User,
+	}
 }
 
 func (c ConfigDir) QueryFolderContainsFile(fileName string) *Config {

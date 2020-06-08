@@ -12,14 +12,14 @@ import (
 
 var hasVendorName = true
 var systemSettingFolders []string
-var globalSettingFolder string
+var userSettingFolder string
 var cacheFolder string
 
 func init() {
 	if os.Getenv("XDG_CONFIG_HOME") != "" {
-		globalSettingFolder = os.Getenv("XDG_CONFIG_HOME")
+		userSettingFolder = os.Getenv("XDG_CONFIG_HOME")
 	} else {
-		globalSettingFolder = filepath.Join(os.Getenv("HOME"), ".config")
+		userSettingFolder = filepath.Join(os.Getenv("HOME"), ".config")
 	}
 	if os.Getenv("XDG_CONFIG_DIRS") != "" {
 		systemSettingFolders = strings.Split(os.Getenv("XDG_CONFIG_DIRS"), ":")
