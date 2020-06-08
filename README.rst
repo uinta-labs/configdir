@@ -1,7 +1,7 @@
 configdir for Golang
 =====================
 
-Multi platform library of configuration directory for Golang.
+Multi platform library of configuration directory for Go.
 
 Originally based on https://github.com/shibukawa/configdir
 
@@ -75,7 +75,7 @@ When storing configuration, get configuration folder by using ``configdir.Config
    folders[0].WriteFile("setting.json", data)
 
    // Stores to user folder
-   folders = configDirs.QueryFolders(configdir.Global)
+   folders = configDirs.QueryFolders(configdir.User)
    folders[0].WriteFile("setting.json", data)
 
    // Stores to system folder
