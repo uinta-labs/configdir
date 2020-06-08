@@ -2,11 +2,12 @@ package configdir_test
 
 import (
 	"encoding/json"
-	"github.com/shibukawa/configdir"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/uinta-labs/configdir"
 )
 
 type Config struct {
@@ -46,7 +47,7 @@ func ExampleConfigDir_QueryFolders() {
 	folders[0].WriteFile("setting.json", data)
 
 	// Stores to user folder
-	folders = configDirs.QueryFolders(configdir.Global)
+	folders = configDirs.QueryFolders(configdir.User)
 	folders[0].WriteFile("setting.json", data)
 
 	// Stores to system folder
